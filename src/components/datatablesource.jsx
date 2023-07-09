@@ -5,6 +5,7 @@ export const userColumns = [
       headerName: "User",
       width: 230,
       renderCell: (params) => {
+        console.log(params)
         return (
           <div className="cellWithImg">
             <img className="cellImg" src={params.row.img} alt="avatar" />
@@ -35,6 +36,33 @@ export const userColumns = [
           </div>
         );
       },
+    },
+  ];
+
+  export const productColumns = [
+    { field: "_id", headerName: "ID", width: 70 },
+    {
+      field: "product",
+      headerName: "Product",
+      width: 230,
+      renderCell: (params) => {
+        return (
+          <div className="cellWithImg">
+            <img className="cellImg" src={params.row.img} alt="avatar" />
+            {params.row.title}
+          </div>
+        );
+      },
+    },
+    {
+      field: "availability",
+      headerName: "Availability",
+      width: 260,
+    },
+    {
+      field: "price",
+      headerName: "Price",
+      width: 230,
     },
   ];
   

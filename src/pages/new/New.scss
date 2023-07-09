@@ -1,13 +1,23 @@
 .new{
     display: flex;
     width: 100%;
+    background-color: #fcfcfc;
     .newContainer{
         flex: 6;
-        .top,.bottom{
-            box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
-            margin: 10px;
-            // padding: 5px;
+        .top{
+            font-weight: bold;
+            padding: 5px 13px;
+            box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+            font-size: 30px;
+            margin: 10px 20px;
+            margin-bottom: 1px;
+        }
+        .bottom{
+            border: 1px solid #f0f0f0;
+            border-top: 1px solid white;
+            margin: 10px 20px;
             display: flex;
+            margin-top: -2px;
             h1{
                 color: rgb(122, 126, 128);
                 padding: 5px;
@@ -18,17 +28,29 @@
                 display: flex;
                 align-items: center;
                 justify-content: center;
+                .item{
+                    display:flex;
+                    align-items: center;
+                    justify-content: center;
+                    .addText{
+                        font-size: 20px;
+                        color: rgb(107, 131, 145);
+                        font-weight: bold;
+                        cursor: pointer;
+                        padding: 10px;
+                        text-align: center;
+                    }
+                }
                 .myimg{
-                    width: 100px;
-                    height: 100px;
+                    width: 210px;
+                    height: 210px;
+                    box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 11px 0px;
                     border-radius: 50%;
-                    object-fit: cover;
-                    background-color: white;
                 }
             }
             .right{
                 flex:2;
-                form{
+                .forms{
                     display: flex;
                     flex-wrap: wrap;
                     gap: 20px;
@@ -65,11 +87,11 @@
                     }
                     .btn{
                         width: 150px;
-                        padding: 9px;
+                        padding: 8px 4px;
                         font-weight: bold;
-                        border-radius: 10px;
+                        border-radius: 4px;
                         color: white;
-                        background-color: rgba(0, 255, 170, 0.973);
+                        background-color: rgb(241,51,151);
                         border: none;
                         outline: none;
                         cursor: pointer;

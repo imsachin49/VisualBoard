@@ -1,87 +1,68 @@
-import React from 'react'
-import './Widgets.scss'
-import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-import Person2OutlinedIcon from '@mui/icons-material/Person2Outlined';
-import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
-import SellIcon from '@mui/icons-material/Sell';
-import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
-import AccountBoxIcon from '@mui/icons-material/AccountBox';
+import "./Widgets.scss";
+import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
+import ArrowUpward from '@mui/icons-material/ArrowUpward';
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { userRequest } from "../../requestMethods";
+import { useSelector } from "react-redux";
 
-const Widgets = ({type}) => {
-  let data;
-  //nodb
-  let amount = 1000;
-  let diff = 25;
-  switch (type) {
-    case 'user':
-      data = {
-        title: 'USERS',
-        isMoney: false,
-        link: 'See all user',
-        icon: <Person2OutlinedIcon className='icon' 
-          style={{
-            color:'purple',
-            // backgroundColor:'lightblue',
-          }} />,
+export default function Widgets() {
+  const [income, setIncome] = useState([]);
+  const token=useSelector(state=>state?.user?.currentUser?.accessToken)
+
+  useEffect(() => {
+    const getIncome = async () => {
+      try {
+        const res = await axios.get("https://full-stack-ecommerce-mu.vercel.app/api/orders/income",{
+          headers: {
+            authorization: `Bearer ${token}`,
+          }
+        }
+        );
+        setIncome(res.data);
+      } catch (err) {
+        console.log(err);
       }
-      break;
-      case 'order':
-      data = {
-        title: 'ORDERS',
-        isMoney: false,
-        link: 'view all orders',
-        icon: <SellIcon className='icon'
-        style={{
-            color:'crimson',
-            // backgroundColor:'lightCoral',
-          }} />,
-      }
-      break;
-      case 'earning':
-      data = {
-        title: 'EARNINGS',
-        isMoney: true,
-        link: 'view net earnings',
-        icon: <MonetizationOnIcon className='icon'
-        style={{
-            color:'cyan',
-            // backgroundColor:'lightCyan',
-          }} 
-         />,
-      }
-      break;
-      case 'balance':
-      data = {
-        title: 'BALANCE',
-        isMoney: true,
-        link: 'view all balance',
-        icon: <AccountBalanceWalletIcon className='icon'
-        style={{
-            color:'green',
-            // backgroundColor:'lightGreen',
-          }} 
-        />,
-      }
-    default:
-      break;
-  }
+    };
+    getIncome();
+  }, [token]);
+
+  console.log(income)
+
+
+
   return (
-    <div className='widgets'>
-        <div className='left'>
-          <span className='title'>{data.title}</span>
-          <span className='counter'>{data.isMoney && "$"} {amount}</span>
-          <span className='link'>{data.link}</span>
+    <div className="featured">
+      <div className="featuredItem">
+        <span className="featuredTitle">Revanue</span>
+        <div className="featuredMoneyContainer">
+          <span className="featuredMoney">$2,415</span>
+          <span className="featuredMoneyRate">
+            -11.4 <ArrowDownwardIcon  className="featuredIcon negative"/>
+          </span>
         </div>
-        <div className='right'>
-          <div className='percentage negative'>
-            <KeyboardArrowUpIcon />
-            {diff}%
-          </div>
-            {/* <AccountBoxIcon className='icon' /> */}
-            {data.icon}
+        <span className="featuredSub">Compared to last month</span>
+      </div>
+      <div className="featuredItem">
+        <span className="featuredTitle">Sales</span>
+        <div className="featuredMoneyContainer">
+          <span className="featuredMoney">$4,415</span>
+          <span className="featuredMoneyRate">
+            -1.4 <ArrowUpward className="featuredIcon negative"/>
+          </span>
         </div>
+        <span className="featuredSub">Compared to last month</span>
+      </div>
+      <div className="featuredItem">
+        <span className="featuredTitle">Cost</span>
+        <div className="featuredMoneyContainer">
+          <span className="featuredMoney">$2,225</span>
+          <span className="featuredMoneyRate">
+            +2.4 <ArrowUpward className="featuredIcon"/>
+          </span>
+        </div>
+        <span className="featuredSub">Compared to last month</span>
+      </div>
     </div>
-  )
+  );
 }
-
-export default Widgets

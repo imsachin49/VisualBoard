@@ -1,8 +1,29 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 body {
   margin: 0;
-  font-family:'candara',sans-serif;
+  font-family: "candara", sans-serif;
+  font-family: "Open Sans", sans-serif;
+  overflow-x: hidden;
 }
 
-code {
-  font-family: 'candara',sans-serif;
+::-webkit-scrollbar {
+  width: 2.5px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: gray;
+}
+
+.css-1w5m2wr-MuiDataGrid-virtualScroller{
+  overflow-x: hidden !important;
+  font-family: "Open Sans", sans-serif;
+  color:rgb(0, 0, 0);
 }

@@ -1,5 +1,5 @@
 import axios from "axios";
-
+import { useSelector } from "react-redux";
 const BASE_URL = "https://full-stack-ecommerce-mu.vercel.app/api";
 const user = JSON.parse(localStorage.getItem("persist:root"))?.user;
 const currentUser = user && JSON.parse(user).currentUser;
@@ -11,7 +11,13 @@ export const publicRequest = axios.create({
     baseURL: BASE_URL
 })
 
+
 export const userRequest= axios.create({
     baseURL: BASE_URL,
+    headers:{ authorization: `Bearer ${TOKEN}` }
+})
+
+export const localRequest=axios.create({
+    baseURL: "http://localhost:5000/api",
     headers:{ authorization: `Bearer ${TOKEN}` }
 })
