@@ -1,7 +1,5 @@
 import "./WidgetLg.scss";
-import VisibilityIcon from '@mui/icons-material/Visibility';
 import axios from "axios";
-import { userRequest } from "../../requestMethods";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import moment from 'moment'
@@ -54,7 +52,10 @@ export default function WidgetLg() {
             <tr className="widgetLgTr" key={m._id}>
               <td className="widgetLgUser">
                 <img
-                  src="https://avatars.dicebear.com/api/identicon/John.svg"
+                  src={
+                    m.userimg ? m.userimg :
+                    generateProfilePic(m.user?.username)
+                  }
                   alt=""
                   className="widgetLgImg"
                 />

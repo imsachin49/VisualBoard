@@ -9,7 +9,6 @@ import UserDataTable from '../../components/datatable/UserDataTable'
 
 const List = () => {
   const location = useLocation();
-  console.log(location.pathname);
   return (
     <div className='list'>
       <Sidebar />

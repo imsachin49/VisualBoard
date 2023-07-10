@@ -55,9 +55,6 @@ const Home = () => {
     };
     getStats();
   }, [MONTHS,token]);
-
-  console.log(userStats)
-
   
   return (
     <div className="home">

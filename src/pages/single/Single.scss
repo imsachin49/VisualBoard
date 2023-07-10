@@ -368,8 +368,8 @@ th {
 }
 
 .userShowImg {
-  width: 40px;
-  height: 40px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
   object-fit: cover;
 }
@@ -382,10 +382,16 @@ th {
 
 .userShowUsername {
   font-weight: 600;
+  font-size: 24px;
+  font-family: "Open sans", sans-serif;
+  text-transform: capitalize;
 }
 
 .userShowUserTitle {
   font-weight: 300;
+  font-size: 15px;
+  font-style: italic;
+  font-family: "candara", sans-serif;
 }
 
 .userShowBottom{
@@ -411,6 +417,20 @@ th {
 
 .userShowInfoTitle{
     margin-left: 10px;
+    text-transform: capitalize;
+}
+
+.mail{
+  text-transform: lowercase;
+  font-family: "Open sans", sans-serif;
+  font-size: 15px;
+  text-decoration: underline;
+}
+
+.dob{
+  text-transform: uppercase;
+  font-family: "Open sans", sans-serif;
+  font-size: 15px;
 }
 
 .userUpdateTitle{

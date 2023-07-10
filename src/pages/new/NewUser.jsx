@@ -13,9 +13,11 @@ import {
 import app from "../../Firebase";
 import {addCustomer} from "../../redux/apiCalls";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const NewUser = () => {
   const dispatch = useDispatch();
+  const navigate=useNavigate();
   const [file, setFile] = useState("");
   const [inputs, setInputs] = useState({
     username: "",
@@ -65,12 +67,12 @@ const NewUser = () => {
               email:inputs.email,
               phoneNo:inputs.phoneNo,
               password:inputs.password,
-              Address:inputs.Address,
-              DateOfBirth:inputs.DateOfBirth,
+              address:inputs.Address,
+              dateOfBirth:inputs.DateOfBirth,
               isAdmin:inputs.isAdmin,
               userimg:downloadURL,
             }
-            addCustomer(user,dispatch);
+            addCustomer(user,dispatch,navigate);
             console.log(user);
           });
         }

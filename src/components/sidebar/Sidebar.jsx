@@ -16,11 +16,16 @@ import { Link,useNavigate } from "react-router-dom";
 import BubbleChartIcon from '@mui/icons-material/BubbleChart';
 import TrendingUpIcon from '@mui/icons-material/TrendingUp';
 import {setLogout} from "../../redux/userRedux"; 
-import {useDispatch} from "react-redux";
+import {useDispatch,useSelector} from "react-redux";
+import { useLocation } from "react-router-dom";
 
 const Sidebar = () => {
   const dispatch=useDispatch();
   const navigate=useNavigate();
+  const location=useLocation();
+  const path=location.pathname;
+  const userId=useSelector(state=>state?.user?.currentUser?.user?.id);
+
   const handleLogout=()=>{
     dispatch(setLogout());
     navigate("/login");
@@ -37,26 +42,28 @@ const Sidebar = () => {
       <div className="center">
         <ul>
           <span className="type">Dashboard</span>
-          <li>
+          <li className={`${path==="/" ? "active" : ""}`}>
+            <Link to="/" style={{ textDecoration: "none" }}>
             <span className="icon">
               <HomeIcon />
               Home
             </span>
+            </Link>
           </li>
-          <li>
+          <li className={`${path==="/analytics" ? "active" : ""}`}>
             <span className="icon">
               <BubbleChartIcon />
               Analytics
             </span>
           </li>
-          <li>
+          <li className={`${path==="/trending" ? "active" : ""}`}>
             <span className="icon">
               <TrendingUpIcon />
               Sales
             </span>
           </li>
           <span className="type">Lists</span>
-          <li>
+          <li className={`${path==="/users" ? "active" : ""}`}>
             <Link to="/users" style={{ textDecoration: "none" }}>
               <span className="icon">
                 <PersonIcon />
@@ -64,7 +71,7 @@ const Sidebar = () => {
               </span>
             </Link>
           </li>
-          <li>
+          <li className={`${path==="/products" ? "active" : ""}`}>
             <Link to="/products" style={{ textDecoration: "none" }}>
               <span className="icon">
                 <CategoryIcon />
@@ -72,61 +79,63 @@ const Sidebar = () => {
               </span>
             </Link>
           </li>
-          <li>
+          <li className={`${path==="/stats" ? "active" : ""}`}>
             <span className="icon">
               <EqualizerIcon />
               Stats
             </span>
           </li>
-          <li>
+          <li className={`${path==="/orders" ? "active" : ""}`}>
             <span className="icon">
               <StoreMallDirectoryIcon />
               Orders
             </span>
           </li>
+          <span className="type">User</span>
+          <li className={`${path===`/users/${userId}` ? "active" : ""}`}>
+            <Link to={`/users/${userId}`} style={{ textDecoration: "none" }}>
+              <span className="icon">
+                <AssignmentIndIcon />
+                Profile
+              </span>
+            </Link>
+          </li>
+          <li className={`${path==="/logout" ? "active" : ""}`}>
+            <Link to="/login" className="icon">
+              <LogoutIcon />
+              <span onClick={handleLogout}>Logout</span>
+            </Link>
+          </li>
           <span className="type">Data</span>
-          <li>
+          <li className={`${path==="/delivery" ? "active" : ""}`}>
             <span className="icon">
               <LocalShippingIcon />
               Delivery
             </span>
           </li>
-          <li>
+          <li className={`${path==="/notification" ? "active" : ""}`}>
             <span className="icon">
               <NotificationsIcon />
               Notifications
             </span>
           </li>
-          <li>
+          <li className={`${path==="/health" ? "active" : ""}`}>
             <span className="icon">
               <SurroundSoundIcon />
               System Health
             </span>
           </li>
-          <li>
+          <li className={`${path==="/logs" ? "active" : ""}`}>
             <span className="icon">
               <PsychologyIcon />
               Logs
             </span>
           </li>
-          <li>
+          <li className={`${path==="/setting" ? "active" : ""}`}>
             <span className="icon">
               <SettingsIcon />
               Setting
             </span>
-          </li>
-          <span className="type">User</span>
-          <li>
-            <span className="icon">
-              <AssignmentIndIcon />
-              Profile
-            </span>
-          </li>
-          <li>
-            <Link to="/login" className="icon">
-              <LogoutIcon />
-              <span onClick={handleLogout}>Logout</span>
-            </Link>
           </li>
         </ul>
         <span className="type">Color Option</span>

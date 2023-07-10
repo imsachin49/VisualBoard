@@ -14,11 +14,9 @@ const ProductDataTable = () => {
   
   useEffect(() => {
     getProducts(dispatch);
-    console.log("EWDRTGYHJU")
   }, [dispatch,location.pathname]);
 
   const products= useSelector((state) => state?.product?.products);
-  console.log("products",products);
 
   const handleDelete = id => {
    deleteProduct(id,dispatch);

@@ -34,7 +34,7 @@ export const login = async (dispatch,user,navigate) => {
 export const getProducts = async (dispatch) => {
     dispatch(getProductsStart());
     try {
-        const res = await localRequest.get("/products/all");
+        const res = await userRequest.get("/products/all");
         dispatch(getProductsSuccess(res.data));
     } catch (err) {
         dispatch(getProductsFailure());
@@ -46,7 +46,7 @@ export const deleteProduct = async (id,dispatch) => {
     dispatch(deleteProductStart());
     try {
         // const res=await publicRequest.delete("/products/"+id);
-        const res=await localRequest.delete("/products"+id);
+        const res=await userRequest.delete("/products"+id);
         dispatch(deleteProductSuccess(id));
         window.location.reload();
         console.log(res.data);
@@ -67,13 +67,12 @@ export const addProduct = async (product,dispatch) => {
     }
 }
 
-export const updateProduct = async (id,product,dispatch) => {
-    console.log(id+"hei............")
+export const updateProduct = async (id,product,dispatch,navigate) => {
     dispatch(updateProductStart());
     try {
         const res = await userRequest.put("/products/"+id, product);
-        // dispatch(updateProductSuccess({id,product}));
-        window.location.replace("/");
+        dispatch(updateProductSuccess({product:res.data}));
+        navigate("/products");
         console.log(res.data);
     } catch (err) {
         dispatch(updateProductFailure());
@@ -101,24 +100,24 @@ export const deleteCustomer=async(id,dispatch)=>{
     }   
 }
 
-export const addCustomer=async(customer,dispatch)=>{
+export const addCustomer=async(customer,dispatch,navigate)=>{
     dispatch(createCustomerStart());
     try {
         const res = await publicRequest.post("/auth/register",customer);
         dispatch(createCustomerSuccess(res.data.savedUser));
-        window.location.replace("/");
+        navigate("/users");
     } catch (err) {
         dispatch(createCustomerFailure());
     }   
 }
 
-export const updateCustomer=async(id,customer,dispatch)=>{
+export const updateCustomer=async(id,customer,dispatch,navigate)=>{
     dispatch(updateCustomerStart());
     try {
         const res = await userRequest.put("/users/"+id,customer);
-        dispatch(updateCustomerSuccess({id,customer}));
-        window.location.replace("/");
+        dispatch(updateCustomerSuccess({customer:res.data}));
         console.log(res.data);
+        navigate("/users");
     } catch (err) {
         dispatch(updateCustomerFailure());
     }   

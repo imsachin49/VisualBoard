@@ -7,12 +7,26 @@ import FullscreenExitIcon from "@mui/icons-material/FullscreenExit";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import ChatBubbleIcon from "@mui/icons-material/ChatBubble";
 import ListIcon from "@mui/icons-material/List";
-import { IconButton } from "@mui/material";
+import { Button, IconButton } from "@mui/material";
 import { GoSearch } from "react-icons/go";
 import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { resetProducts } from "../../redux/productRedux";
+import customerRedux, { resetCustomers } from "../../redux/customerRedux";
 
 const Navbar = () => {
   const user=useSelector(state=>state?.user?.currentUser?.user?.username)
+  const dispatch = useDispatch();
+  const products=useSelector(state=>state?.product?.products)
+  const customers=useSelector(state=>state?.customer?.customers)
+
+  const productReset = () => {
+    dispatch(resetProducts());
+  };
+
+  const customerReset = () => {
+    dispatch(resetCustomers());
+  };
 
   return (
       <div className="navbar">
@@ -28,6 +42,12 @@ const Navbar = () => {
             <IconButton className="icon">
               <DarkModeIcon />
             </IconButton>
+           {/* <Button onClick={productReset}>
+              Reset Products
+            </Button>
+            <Button className="icon" onClick={customerReset}>
+              Reset Customers
+            </Button>*/}
             <div className="icon">
               <img
                 src="https://images.unsplash.com/photo-1483726234545-481d6e880fc6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Ym95fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60"

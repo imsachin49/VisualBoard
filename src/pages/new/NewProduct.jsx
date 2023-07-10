@@ -47,10 +47,6 @@ const NewProduct = () => {
     const { value } = e.target;
     setColor(value.split(","));
   };
-
-  console.log(categories);
-  console.log(size);
-  console.log(color);
   
   const handSubmit = async(e) => {    
     e.preventDefault();

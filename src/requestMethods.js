@@ -1,5 +1,4 @@
 import axios from "axios";
-import { useSelector } from "react-redux";
 const BASE_URL = "https://full-stack-ecommerce-mu.vercel.app/api";
 const user = JSON.parse(localStorage.getItem("persist:root"))?.user;
 const currentUser = user && JSON.parse(user).currentUser;

@@ -20,16 +20,16 @@ import {
 import app from "../../Firebase";
 import { addProduct } from "../../redux/apiCalls";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { updateProduct } from "../../redux/apiCalls";
 
 const SingleProduct = () => {
   const location = useLocation();
-  console.log(location.pathname.split("/")[2]);
   const productId = location.pathname.split("/")[2];
+  const navigate = useNavigate();
   const product = useSelector((state) =>
     state.product.products.find((p) => p._id === productId)
   );
-  console.log(product);
   const [pStats, setPStats] = useState([]);
 
   const MONTHS = useMemo(
@@ -71,7 +71,6 @@ const SingleProduct = () => {
   }, [productId, MONTHS, location.pathname]);
 
   const dispatch = useDispatch();
-  // const [file, setFile] = useState(product?.img || "");
   const [file, setFile] = useState(null);
   const [previewUrl, setPreviewUrl] = useState(product?.img || "");
 
@@ -118,8 +117,6 @@ const SingleProduct = () => {
     reader.readAsDataURL(selectedFile);
   };
 
-  console.log(previewUrl)
-  console.log(product._id)
 
   const handSubmit = async (e) => {
     e.preventDefault();
@@ -163,7 +160,7 @@ const SingleProduct = () => {
               color,
               _id:productId
             };
-            updateProduct(productId,product,dispatch);
+            updateProduct(productId,product,dispatch,navigate);
             console.log(product);
           });
         }
@@ -181,7 +178,7 @@ const SingleProduct = () => {
           color,
           _id:productId
         };
-        updateProduct(productId,product,dispatch);
+        updateProduct(productId,product,dispatch,navigate);
         console.log(product);
       }
   };

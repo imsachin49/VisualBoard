@@ -44,7 +44,7 @@ export default function WidgetSm() {
           return(
           <li className="widgetSmListItem" key={user._id}>
             <img
-              src={generateProfilePic(user?.username || "random")}
+              src={user.userimg ? user.userimg : generateProfilePic(user?.username || "random")}
               alt=""
               className="widgetSmImg"
             />

@@ -27,9 +27,9 @@ const customerSlice = createSlice({
       state.error = false;
     },
     createCustomerSuccess: (state, action) => {
-      state.customers.push(action.payload);
       state.isFetching = false;
       state.error = false;
+      state.customers = [action.payload, ...state.customers];
     },
     createCustomerFailure: (state) => {
       state.isFetching = false;
@@ -40,9 +40,13 @@ const customerSlice = createSlice({
       state.isFetching = true;
     },
     updateCustomerSuccess: (state, action) => {
-      state.customers[
-        state.customers.findIndex((item) => item._id === action.payload.id)
-      ] = action.payload.customer;
+      const updatedCustomer = state.customers.map((customer) => {
+        if (customer._id === action.payload._id) {
+          return action.payload;
+        }
+        return customer;
+      });
+      state.customers = updatedCustomer;
       state.isFetching = false;
       state.error = false;
     },
@@ -56,13 +60,9 @@ const customerSlice = createSlice({
       state.error = false;
     },
     deleteCustomerSuccess: (state, action) => {
-      // state.customers = state.customers.filter(
-      //   (customer) => customer._id !== action.payload
-      // );
-      state?.customers?.splice(
-        state?.customers?.findIndex((item) => item?._id === action.payload),
-        1
-      )
+      state.customers = state.customers.filter(
+        (customer) => customer._id !== action.payload
+      );
       state.isFetching = false;
       state.error = false;
     },
@@ -70,6 +70,11 @@ const customerSlice = createSlice({
       state.isFetching = false;
       state.error = true;
     },
+    resetCustomers: (state) => {
+      state.customers = [];
+      state.isFetching = false;
+      state.error = false;
+    }
   },
 });
 
@@ -86,6 +91,7 @@ export const {
     deleteCustomerStart,
     deleteCustomerSuccess,
     deleteCustomerFailure,
+    resetCustomers
 } = customerSlice.actions;
 
 export default customerSlice.reducer;

@@ -8,18 +8,16 @@ import { useDispatch,useSelector } from "react-redux";
 import { getCustomers,deleteCustomer } from "../../redux/apiCalls";
 import {AiFillDelete} from "react-icons/ai";
 
+
 const UserDataTable = () => {
   const location = useLocation();
-  console.log(location.pathname);
   const dispatch = useDispatch();
 
   useEffect(() => {
     getCustomers(dispatch);
-    console.log("EWDRTGYHJU")
   }, [dispatch,location.pathname]);
 
   const customers= useSelector((state) => state?.customer?.customers);
-  console.log("customers",customers);
 
   const generateProfilePic = (userName) => {
     const baseUrl = "https://avatars.dicebear.com/api/";
@@ -43,7 +41,7 @@ const UserDataTable = () => {
       renderCell: (params) => {
         return (
           <div className="productListItem">
-            <img className="productListImg" src={generateProfilePic(params?.row?.username)} alt="" />
+            <img className="productListImg" src={params.row.userimg ? params.row.userimg : generateProfilePic(params?.row?.username)} alt="" />
             <span className="productListTxt">{(params?.row?.username)?.substr(0,16)}</span>
           </div>
         );
